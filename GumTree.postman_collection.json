@@ -1,0 +1,421 @@
+{
+	"info": {
+		"_postman_id": "351ae51f-3147-425c-8372-d19d3eb23555",
+		"name": "GumTree",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Basic Endpoint Tests",
+			"item": [
+				{
+					"name": "Validate Ad List title matches table",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"pm.environment.set(\"id\", jsonData.ads[0].id);\r",
+									"pm.environment.set(\"title\", jsonData.ads[0].title);\r",
+									"//pm.environment.set(\"thumbnail\", jsonData.ads[0].pictures[0].size);\r",
+									"\r",
+									"pm.test(\"At least one ad found\", function () {\r",
+									"pm.expect(jsonData.ads[0].id).to.above(1200000000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type is application/json\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\", \"application/json;charset=UTF-8\" );\r",
+									"});\r",
+									"\r",
+									"var count = jsonData.ads.length;\r",
+									"console.log(\"number of ads \", count);\r",
+									"\r",
+									"for(i=0;i<count;i++)\r",
+									"{\r",
+									"    pm.test(\"Title should contain 'table'\", function () {\r",
+									"    pm.expect(jsonData.ads[i].title).to.include(\"table\");\r",
+									"})  \r",
+									"};\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://ecg-api.gumtree.com.au/api/papi/ads/search?categoryId=0&categoryRedirected=1&includeTopAds=1&keyword=Table&locationId=3003435&page=1&size=20&sortType=DATE_DESCENDING",
+							"protocol": "https",
+							"host": [
+								"ecg-api",
+								"gumtree",
+								"com",
+								"au"
+							],
+							"path": [
+								"api",
+								"papi",
+								"ads",
+								"search"
+							],
+							"query": [
+								{
+									"key": "categoryId",
+									"value": "0"
+								},
+								{
+									"key": "categoryRedirected",
+									"value": "1"
+								},
+								{
+									"key": "includeTopAds",
+									"value": "1"
+								},
+								{
+									"key": "keyword",
+									"value": "Table"
+								},
+								{
+									"key": "locationId",
+									"value": "3003435"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "size",
+									"value": "20"
+								},
+								{
+									"key": "sortType",
+									"value": "DATE_DESCENDING"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Validate first Ad is available",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Correct 1st Ad data returned\", function () {\r",
+									"    pm.expect(jsonData.ads[0].id).to.eql(environment.id);\r",
+									"    pm.expect(jsonData.ads[0].title).to.eql(environment.title);\r",
+									"});\r",
+									"\r",
+									"//pm.test(\"All keys available\", function () {\r",
+									"//    pm.expect(jsonData.ads[0]).has.key('price');\r",
+									"//});\r",
+									"\r",
+									"pm.test(\"Content-Type is application/json\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\", \"application/json;charset=UTF-8\" );\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://ecg-api.gumtree.com.au/api/papi/ads/search?categoryId=0&categoryRedirected=1&includeTopAds=1&keyword=Table&locationId=3003435&page=1&size=20&sortType=DATE_DESCENDING",
+							"protocol": "https",
+							"host": [
+								"ecg-api",
+								"gumtree",
+								"com",
+								"au"
+							],
+							"path": [
+								"api",
+								"papi",
+								"ads",
+								"search"
+							],
+							"query": [
+								{
+									"key": "categoryId",
+									"value": "0"
+								},
+								{
+									"key": "categoryRedirected",
+									"value": "1"
+								},
+								{
+									"key": "includeTopAds",
+									"value": "1"
+								},
+								{
+									"key": "keyword",
+									"value": "Table"
+								},
+								{
+									"key": "locationId",
+									"value": "3003435"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "size",
+									"value": "20"
+								},
+								{
+									"key": "sortType",
+									"value": "DATE_DESCENDING"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Validate parent level keys",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"var count = Object.keys(jsonData).length;\r",
+									"\r",
+									"console.log(\"The number of expected parent keys in the response body is \" + count);\r",
+									"\r",
+									"pm.test(\"Content-Type is application/json\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\", \"application/json;charset=UTF-8\" );\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://ecg-api.gumtree.com.au/api/papi/ads/search?categoryId=0&categoryRedirected=1&includeTopAds=1&keyword=Table&locationId=3003435&page=1&size=20&sortType=DATE_DESCENDING",
+							"protocol": "https",
+							"host": [
+								"ecg-api",
+								"gumtree",
+								"com",
+								"au"
+							],
+							"path": [
+								"api",
+								"papi",
+								"ads",
+								"search"
+							],
+							"query": [
+								{
+									"key": "categoryId",
+									"value": "0"
+								},
+								{
+									"key": "categoryRedirected",
+									"value": "1"
+								},
+								{
+									"key": "includeTopAds",
+									"value": "1"
+								},
+								{
+									"key": "keyword",
+									"value": "Table"
+								},
+								{
+									"key": "locationId",
+									"value": "3003435"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "size",
+									"value": "20"
+								},
+								{
+									"key": "sortType",
+									"value": "DATE_DESCENDING"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Negative tests",
+			"item": [
+				{
+					"name": "Get no Ad found",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Body num of Ads found\", function () {\r",
+									"    pm.expect(jsonData.paging.numFound).to.eql(0);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type is application/json\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\", \"application/json;charset=UTF-8\" );\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://ecg-api.gumtree.com.au/api/papi/ads/search?categoryId=0&categoryRedirected=1&includeTopAds=1&keyword=Tablexxx&locationId=3003435&page=1&size=20&sortType=DATE_DESCENDING",
+							"protocol": "https",
+							"host": [
+								"ecg-api",
+								"gumtree",
+								"com",
+								"au"
+							],
+							"path": [
+								"api",
+								"papi",
+								"ads",
+								"search"
+							],
+							"query": [
+								{
+									"key": "categoryId",
+									"value": "0"
+								},
+								{
+									"key": "categoryRedirected",
+									"value": "1"
+								},
+								{
+									"key": "includeTopAds",
+									"value": "1"
+								},
+								{
+									"key": "keyword",
+									"value": "Tablexxx"
+								},
+								{
+									"key": "locationId",
+									"value": "3003435"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "size",
+									"value": "20"
+								},
+								{
+									"key": "sortType",
+									"value": "DATE_DESCENDING"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"pm.test(\"Response time is less than 3000ms\", function () {",
+					"    pm.expect(pm.response.responseTime).to.be.below(3000);",
+					"});",
+					""
+				]
+			}
+		}
+	]
+}
