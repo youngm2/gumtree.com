@@ -1,4 +1,6 @@
 GumTreeAutomation
+Challenge 1
+
 1.	Install IntelliJ (Community Edition)
 2.	Install Maven on Windows 10
 3.	Install Git on Windows 10
@@ -12,4 +14,9 @@ GumTreeAutomation
 8.	Run IntelliJ and open project browsing the pom.xml
 9.	In the Command Prompt, go to project folder and execute maven commands to compile, install the package locally and validate the project
 
+Challenge 2
+Install Postman
+Upload the collection "GumTree.postman_collection.json"
+Run the collection to see the test created
 
+Thank you
