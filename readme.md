@@ -16,6 +16,7 @@ Challenge 1
 9.	In the Command Prompt, go to project folder and execute maven commands to compile, install the package locally and validate the project
 
 Challenge 2
+
 Install Postman
 Upload the collection "GumTree.postman_collection.json"
 Run the collection to see the test created
