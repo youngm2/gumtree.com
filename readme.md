@@ -1,4 +1,5 @@
 GumTreeAutomation
+
 Challenge 1
 
 1.	Install IntelliJ (Community Edition)
